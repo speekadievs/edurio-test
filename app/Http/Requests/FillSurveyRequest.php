@@ -26,6 +26,8 @@ class FillSurveyRequest extends FormRequest
     public function rules()
     {
         return [
+            'answers' => 'required|array',
+
             'answers.*.question_id' => [
                 'required',
                 Rule::exists(SurveyQuestion::class, 'id')

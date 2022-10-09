@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Services\SurveyServiceInterface;
+use App\Exceptions\NoAnswersException;
 use App\Models\Survey;
 use App\Models\User;
 
@@ -24,6 +25,15 @@ class SurveyService implements SurveyServiceInterface
      */
     public function get(int $id): Survey
     {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * @param int $id
+     * @return Survey
+     */
+    public function getWithQuestions(int $id): Survey
+    {
         return $this->model->withQuestions()->findOrFail($id);
     }
 
@@ -32,9 +42,14 @@ class SurveyService implements SurveyServiceInterface
      * @param Survey $survey
      * @param array $answers
      * @return void
+     * @throws NoAnswersException
      */
     public function fill(User $user, Survey $survey, array $answers): void
     {
+        if (count($answers) <= 0) {
+            throw new NoAnswersException();
+        }
+
         $answers = array_map(function ($answer) use ($user, $survey) {
             return $this->formatAnswer($user, $survey, $answer);
         }, $answers);

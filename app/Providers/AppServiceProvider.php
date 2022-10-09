@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use App\Contracts\Repositories\SurveyRepositoryInterface;
-use App\Contracts\Services\GraphServiceInterface;
+use App\Contracts\Services\ResultServiceInterface;
 use App\Contracts\Services\SurveyServiceInterface;
 use App\Models\Survey;
 use App\Repositories\SurveyRepository;
-use App\Services\GraphService;
+use App\Services\ResultService;
 use App\Services\SurveyService;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
             return new SurveyService($this->app->make(Survey::class));
         });
 
-        $this->app->bind(GraphServiceInterface::class, function () {
-            return new GraphService($this->app->make(SurveyServiceInterface::class));
+        $this->app->bind(ResultServiceInterface::class, function () {
+            return new ResultService($this->app->make(SurveyServiceInterface::class));
         });
     }
 

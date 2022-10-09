@@ -24,7 +24,7 @@ class SurveyController extends Controller
      */
     public function get(int $id): JsonResponse
     {
-        return response()->json($this->service->get($id));
+        return response()->json($this->service->getWithQuestions($id));
     }
 
     /**
@@ -32,11 +32,11 @@ class SurveyController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function fill(FillSurveyRequest $request, int $id)
+    public function fill(FillSurveyRequest $request, int $id): JsonResponse
     {
-        $survey = $this->service->get($id);
+        $survey = $this->service->getWithQuestions($id);
 
-        $this->service->fill($request->user(), $survey, $request->all());
+        $this->service->fill($request->user(), $survey, $request->get('answers'));
 
         return response()->json([
             'success' => true
