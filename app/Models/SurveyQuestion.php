@@ -12,14 +12,11 @@ class SurveyQuestion extends Model
 {
     use HasFactory;
 
-    public int $id;
-    public int $survey_id;
-
-    public string $type;
-    public string $value;
-
-    public Carbon $created_at;
-    public Carbon $updated_at;
+    protected $fillable = [
+        'survey_id',
+        'type',
+        'value'
+    ];
 
     public function survey(): BelongsTo
     {

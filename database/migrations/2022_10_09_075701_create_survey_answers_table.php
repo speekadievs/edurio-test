@@ -15,6 +15,12 @@ return new class extends Migration {
         Schema::create('survey_answers', function (Blueprint $table) {
             $table->id();
 
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('CASCADE');
+
             $table->bigInteger('survey_question_id')->unsigned();
             $table->foreign('survey_question_id')
                 ->references('id')
@@ -27,7 +33,7 @@ return new class extends Migration {
                 ->on('survey_options')
                 ->onDelete('CASCADE');
 
-            $table->string('value');
+            $table->string('value')->nullable();
 
             $table->timestamps();
         });

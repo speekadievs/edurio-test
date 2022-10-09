@@ -9,9 +9,9 @@ class SurveyOption extends Model
 {
     use HasFactory;
 
-    public int $id;
-    public int $survey_question_id;
-
-    public string $label;
-    public string $value;
+    protected $fillable = [
+        'survey_question_id',
+        'label',
+        'value'
+    ];
 }
