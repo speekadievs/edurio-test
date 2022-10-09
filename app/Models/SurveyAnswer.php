@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class SurveyAnswer extends Model
+{
+    use HasFactory;
+
+    public int $id;
+    public int $survey_question_id;
+    public int $survey_option_id;
+
+    public string $value;
+}
