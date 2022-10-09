@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/surveys/{id}', [SurveyController::class, 'get']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/surveys/{id}', [SurveyController::class, 'fill']);
 });

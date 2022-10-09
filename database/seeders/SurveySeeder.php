@@ -17,13 +17,13 @@ class SurveySeeder extends Seeder
     {
         $survey = Survey::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 9; $i++) {
             $question = $survey->questions()->create([
                 'type'  => 'radio',
                 'value' => Lorem::sentence()
             ]);
 
-            for ($j = 0; $j < 7; $j++) {
+            for ($j = 0; $j < 6; $j++) {
                 $question->options()->create([
                     'label' => $j,
                     'value' => $j

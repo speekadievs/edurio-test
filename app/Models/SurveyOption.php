@@ -14,4 +14,10 @@ class SurveyOption extends Model
         'label',
         'value'
     ];
+
+    public $hidden = [
+        'survey_question_id',
+        'created_at',
+        'updated_at'
+    ];
 }
